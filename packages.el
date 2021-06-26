@@ -50,25 +50,17 @@
 ;(unpin! t)
 (package! solaire-mode :disable t)
 ;;(package! doom-themes :disable t)
+(when (eq system-type 'gnu-linux)
+  (package! frogtag
+    :recipe (:host github :repo "io12/org-fragtog"))
+  (package! emacs-livedown
+    :recipe (:host github :repo "shime/emacs-livedown"))
+  (package! telega)
+  (package! impatient-mode)
+  (package! ein))
 (package! org-mime)
 (package! org-journal)
-(package! frogtag
-  :recipe (:host github :repo "io12/org-fragtog"))
-(package! modus-themes)
 (package! scroll-on-jump)
-(package! telega)
-(package! evil-motion-trainer-mode
-  :recipe (:host github :repo "martinbaillie/evil-motion-trainer"))
-;; (package! texfrag-mode
-;;   :recipe (:host github :repo "https://github.com/TobiasZawada/texfrag"))
-(package! emacs-livedown
-  :recipe (:host github :repo "shime/emacs-livedown"))
-(package! impatient-mode)
-(package! emacs-livedown
-  :recipe (:host github :repo "storax/graph.el"))
 (package! inf-elixir)
-(package! ein)
 (package! helm)
 (package! evil-cleverparens)
-(package! sokoban)
-(package! fireplace)

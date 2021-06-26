@@ -106,7 +106,7 @@
        ;;upload            ; map local to remote projects via ssh/ftp
 
        :os
-       ;; (:if IS-MAC macos)  ; improve compatibility with macOS
+       (:if IS-MAC macos)  ; improve compatibility with macOS
        tty               ; improve the terminal Emacs experience
 
        :lang
@@ -120,7 +120,7 @@
        ;;csharp            ; unity, .NET, and mono shenanigans
        data              ; config/data formats
        ;;(dart +flutter)   ; paint ui and not much else
-       (elixir)            ; erlang done right
+       (elixir +lsp)            ; erlang done right
        ;;elm               ; care for a cup of TEA?
        emacs-lisp        ; drown in parentheses
        erlang            ; an elegant language for a more civilized age
