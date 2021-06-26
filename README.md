@@ -1,3 +1,3 @@
-# Private Elisp
+# Emacs Doom Config
 
-A repo with my private elisp files.
+A repo with my personal Emacs Doom files.
