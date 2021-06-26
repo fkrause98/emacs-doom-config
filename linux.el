@@ -31,7 +31,7 @@
 ;;; Believe it or not, emacs has a mode for telegram
 (telega-mode-line-mode 1)
 (add-hook 'telega-load-hook
-          (lambda ()
+          #'(lambda ()
             (define-key global-map (kbd "C-c t") telega-prefix-map)))
 
 ;;; Elixir
