@@ -64,3 +64,4 @@
 (package! inf-elixir)
 (package! helm)
 (package! evil-cleverparens)
+(package! ox-reveal)
