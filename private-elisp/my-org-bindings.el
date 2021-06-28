@@ -48,5 +48,5 @@
     (add-to-list 'org-entities-user  (list "Q" "\\mathbb{Q}" t "" "" "" "ℚ "))
     (add-to-list 'org-entities-user  (list "R" "\\mathbb{R}" t "" "" "" "ℝ"))
     (add-to-list 'org-entities-user  (list "C" "\\mathbb{C}" t "" "" "" "ℂ"))))
-
+(setq org-return-follows-link t)
 (provide 'my-org-bindings)

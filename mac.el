@@ -10,7 +10,8 @@
 ;; font string. You generally only need these two:
 ;; (when (display-graphic-p)
 ;;; Shell to use
-(setq shell-file-name "/usr/bin/bash"
+(setq shell-file-name "/bin/zsh"
       vterm-shell "/usr/local/bin/fish")
 ;;; Elixir
 (add-to-list 'exec-path "~/elixir-ls")
+;;;

@@ -39,18 +39,12 @@
   (load! "mac"))
 ;;; Private elisp
 (add-load-path! "private-elisp")
-(when (or (display-graphic-p) (daemonp))
-  (progn
-    (require 'random-banner-image "random-banner.el" )
-    (require 'screenshot-svg "screenshot.el")
-    (random-banner-image (expand-file-name "splash/" doom-private-dir))))
 ;;; Scrolling
 (setq scroll-conservatively 101)
 ;;; Indent guides options
 ;; (if (display-graphic-p)
 ;;     (setq highlight-indent-guides-method 'bitmap)
 ;;   (setq highlight-indent-guides-method 'fill))
-(setq highlight-indent-guides-method 'character)
 ;;; Autosave for Org Mode's code blocks.
 (setq org-edit-src-turn-on-auto-save t
       org-src-preserve-indentation t)
@@ -153,8 +147,3 @@
 ;;; C++
 (setq c-default-style "stroustrup")
 (setq-default tab-width 4)
-;;; Lisp
-(add-hook! 'lisp-mode-hook
-           'evil-cleverparens-mode)
-(add-hook! 'emacs-lisp-mode
-          'evil-cleverparens-mode)

@@ -16,7 +16,7 @@
         doom-variable-pitch-font (font-spec :family "EB Garamond" :size 12))
 
 ;;; For when I like to do some web programming
-(setq httpd-root "/home/francisco/Programación/")
+(setq httpd-root "~/Programación/")
 (add-hook! 'web-mode 'my-impatient-mode-server-url)
 (defun start-my-server ()
   (interactive)
@@ -36,3 +36,12 @@
 
 ;;; Elixir
 (add-to-list 'exec-path "~/elixir-ls/release")
+
+;;; Image for the init dashboard
+(when (or (display-graphic-p) (daemonp))
+  (progn
+    (require 'random-banner-image)
+    (require 'screenshot-svg)
+    (random-banner-image (expand-file-name "splash/" doom-private-dir))))
+
+(setq highlight-indent-guides-method 'character)
