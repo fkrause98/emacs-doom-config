@@ -2,5 +2,6 @@
 (add-hook! 'lisp-mode-hook
            'evil-cleverparens-mode)
 (add-hook! 'emacs-lisp-mode
-          'evil-cleverparens-mode)
+           #'(lambda()
+             (evil-cleverparens-mode)))
 (provide 'my-lisp-hooks)

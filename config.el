@@ -147,3 +147,5 @@
 ;;; C++
 (setq c-default-style "stroustrup")
 (setq-default tab-width 4)
+
+(map! "M-x" 'helm-M-x)

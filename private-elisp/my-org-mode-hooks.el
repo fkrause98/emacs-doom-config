@@ -2,7 +2,8 @@
 
 (provide 'my-org-mode-hooks)
 (add-hook 'org-mode-hook 'map-insert-text-in-math-mode)
-(add-hook 'org-mode-hook 'org-fragtog-mode)
+(when (eq system-type 'gnu/linux)
+  (add-hook 'org-mode-hook 'org-fragtog-mode))
 (add-hook 'org-mode-hook '(lambda ()
                             (progn
                               (map-insert-environment)
