@@ -45,9 +45,11 @@
 ;; (if (display-graphic-p)
 ;;     (setq highlight-indent-guides-method 'bitmap)
 ;;   (setq highlight-indent-guides-method 'fill))
-;;; Autosave for Org Mode's code blocks.
+;;; Org mode
+;;
 (setq org-edit-src-turn-on-auto-save t
-      org-src-preserve-indentation t)
+      org-src-preserve-indentation t
+      org-use-sub-superscripts t)
 ;;; Some personal org options, check my-org-bindings.el for the specifics.
 (require 'my-org-bindings)
 (require 'my-org-mode-hooks)

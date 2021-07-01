@@ -14,4 +14,7 @@
       vterm-shell "/usr/local/bin/fish")
 ;;; Elixir
 (add-to-list 'exec-path "~/elixir-ls")
-;;;
+;;; Modifiers
+(setq mac-command-modifier 'control)
+(setq mac-option-modifier 'meta)
+(setq mac-right-option-modifier 'meta)
