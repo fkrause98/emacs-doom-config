@@ -46,7 +46,7 @@
 ;;     (setq highlight-indent-guides-method 'bitmap)
 ;;   (setq highlight-indent-guides-method 'fill))
 ;;; Org mode
-;;
+(setq org-re-reveal-mousewheel t)
 (setq org-edit-src-turn-on-auto-save t
       org-src-preserve-indentation t
       org-use-sub-superscripts t)

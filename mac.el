@@ -18,3 +18,4 @@
 (setq mac-command-modifier 'control)
 (setq mac-option-modifier 'meta)
 (setq mac-right-option-modifier 'meta)
+(setq mac-pass-command-to-system nil)

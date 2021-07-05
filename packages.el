@@ -65,3 +65,4 @@
 (package! helm)
 (package! evil-cleverparens)
 (package! ox-reveal)
+(package! org-present)
