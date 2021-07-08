@@ -8,4 +8,3 @@
         (random (length splash-images)))
   (setq fancy-splash-image
         (nth index-random-image splash-images)))
-(provide 'random-banner-image)

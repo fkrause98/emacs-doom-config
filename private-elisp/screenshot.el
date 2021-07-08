@@ -8,5 +8,3 @@ Saves to a temp file and puts the filename in the kill ring."
       (insert data))
     (kill-new filename)
     (message filename)))
-
-(provide 'screenshot-svg)

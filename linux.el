@@ -12,8 +12,9 @@
 ;;; Shell to use
 (setq shell-file-name "/usr/bin/bash"
       vterm-shell "/usr/bin/fish")
-(setq doom-font (font-spec :family "Fira Code Medium" :size 12)
-        doom-variable-pitch-font (font-spec :family "EB Garamond" :size 12))
+(when (member "Fira Code" (font-family-list))
+  (setq doom-font (font-spec :family "Fira Code Medium" :size 12)
+        doom-variable-pitch-font (font-spec :family "EB Garamond" :size 12)))
 
 ;;; For when I like to do some web programming
 (setq httpd-root "~/Programación/")
@@ -37,11 +38,5 @@
 ;;; Elixir
 (add-to-list 'exec-path "~/elixir-ls/release")
 
-;;; Image for the init dashboard
-(when (or (display-graphic-p) (daemonp))
-  (progn
-    (require 'random-banner-image)
-    (require 'screenshot-svg)
-    (random-banner-image (expand-file-name "splash/" doom-private-dir))))
 
 (setq highlight-indent-guides-method 'character)

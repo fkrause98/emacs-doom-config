@@ -33,12 +33,19 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+
 (when (eq system-type 'gnu/linux)
   (load! "linux"))
 (when (eq system-type 'darwin)
   (load! "mac"))
 ;;; Private elisp
 (add-load-path! "private-elisp")
+;;; Image for the init dashboard
+(when (or (display-graphic-p) (daemonp))
+  (progn
+    (load! "private-elisp/random-banner")
+    (load! "private-elisp/screenshot")
+    (random-banner-image (expand-file-name "splash/" doom-private-dir))))
 ;;; Scrolling
 (setq scroll-conservatively 101)
 ;;; Indent guides options
@@ -151,3 +158,6 @@
 (setq-default tab-width 4)
 
 (map! "M-x" 'helm-M-x)
+
+;;; Elisp / Lisp
+(load! "private-elisp/lisp-hooks")

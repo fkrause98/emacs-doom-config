@@ -1,4 +1,4 @@
-;;; linux.el -*- lexical-binding: t; -*-
+;;; mac.el -*- lexical-binding: t; -*-
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
 ;;
@@ -9,9 +9,12 @@
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
 ;; (when (display-graphic-p)
+;;; Use Fira Code if available
+(when (member "Fira Code" (font-family-list))
+              (setq doom-font "Fira Code"))
 ;;; Shell to use
 (setq shell-file-name "/bin/zsh"
-      vterm-shell "/usr/local/bin/fish")
+      vterm-shell "/bin/zsh")
 ;;; Elixir
 (add-to-list 'exec-path "~/elixir-ls")
 ;;; Modifiers

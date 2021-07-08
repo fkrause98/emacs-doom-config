@@ -15,3 +15,4 @@
 (add-hook 'LaTeX-mode-hook 'tildes-mode)
 ;; (add-hook 'org-mode-hook 'tildes-mode)
 (provide 'tildes-mode)
+;;; tildes.el ends here
