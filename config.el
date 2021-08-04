@@ -161,3 +161,13 @@
 
 ;;; Elisp / Lisp
 (load! "private-elisp/lisp-hooks")
+;;; Web mode
+(setq web-mode-enable-current-element-highlight t)
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+
+
+;;; Evil
+;; (modify-syntax-entry ?_ "w")
+(set-face-attribute 'comint-highlight-prompt nil
+                    :inherit nil)

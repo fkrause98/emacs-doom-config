@@ -13,37 +13,36 @@
 ;;
 ;;      Alternatively, press 'gd' (or 'C-c c d') on a module to browse its
 ;;      directory (for easy access to its source code).
-
+(setq package-native-compile t)
 (doom! :input
        ;;chinese
        ;;japanese
        ;;layout            ; auie,ctsrnm is the superior home row
 
        :completion
-       (company)           ; the ultimate code completion backend
+       company           ; the ultimate code completion backend
        ;; (helm +icons +fuzzy)              ; the *other* search engine for love and life
        ;; ido               ; the other *other* search engine...
-       (ivy +icons)  ;a search engine for love and life
+       (ivy +prescient +icons)  ;a search engine for love and life
 
        :ui
        ;;deft            ;notational velocity for Emacs
        doom              ; what makes DOOM look the way it does
        doom-dashboard    ; a nifty splash screen for Emacs
        doom-quit         ; DOOM quit-message prompts when you quit Emacs
-       (emoji +unicode)  ; 🙂
+       ;; (emoji +unicode)  ; 🙂
        ;;fill-column     ; a `fill-column' indicator
-       ;; hl-todo        ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
+       hl-todo        ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra
        indent-guides      ; highlighted indent columns
        ligatures        ; ligatures and symbols to make your code pretty again
        ;; minimap         ; show a map of the code on the side
-       (modeline)         ; snazzy, Atom-inspired modeline, plus API
+       modeline         ; snazzy, Atom-inspired modeline, plus API
        nav-flash          ; blink cursor line after big motions
        ;;neotree          ; a project drawer, like NERDTree for vim
-       ;;ophints          ; highlight the region an operation acts on
+       ophints          ; highlight the region an operation acts on
        (popup +defaults)  ; tame sudden yet inevitable temporary windows
-       tabs              ; a tab bar for Emacs
-
+       ;; tabs              ; a tab bar for Emacs
        (treemacs +lsp)          ; a project drawer, like neotree but cooler
        ;;unicode           ; extended unicode support for various languages
        vc-gutter         ; vcs diff in the fringe
@@ -69,14 +68,14 @@
        :emacs
        (dired +icons +ranger)             ; making dired pretty [functional]
        electric          ; smarter, keyword-based electric-indent
-       (ibuffer +icons)         ; interactive buffer management
+       ibuffer         ; interactive buffer management
        (undo +tree)              ; persistent, smarter undo for your inevitable mistakes
        vc                ; version-control and Emacs, sitting in a tree
 
        :term
-       ;;eshell            ; the elisp shell that works everywhere
-       ;;shell             ; simple shell REPL for Emacs
-       ;;term              ; basic terminal emulator for Emacs
+       eshell            ; the elisp shell that works everywhere
+       ;; shell              ; simple shell REPL for Emacs
+       ;; term              ; basic terminal emulator for Emacs
        vterm             ; the best terminal emulation in Emacs
 
        :checkers
@@ -90,12 +89,12 @@
        direnv
        docker
        ;;editorconfig      ; let someone else argue about tabs vs spaces
-       ein               ; tame Jupyter notebooks with emacs
+       ;;ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
        ;;gist              ; interacting with github gists
        lookup              ; navigate your code and its documentation
        (lsp +lookup)
-       magit             ; a git porcelain for Emacs
+       (magit +forge)             ; a git porcelain for Emacs
        ;; make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
        pdf               ; pdf enhancements
@@ -135,15 +134,15 @@
        ;;(haskell +dante)  ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ; a language you can depend on
-       (json +lsp)              ; At least it ain't XML
+       json              ; At least it ain't XML
        ;;(java +meghanada) ; the poster child for carpal tunnel syndrome
        (when (eq system-type 'gnu/linux)
-       (javascript +lsp))        ; all(hope(abandon(ye(who(enter(here))))))
+         (javascript +lsp))        ; all(hope(abandon(ye(who(enter(here))))))
        julia             ; a better, faster MATLAB
        ;;kotlin            ; a better, slicker Java(Script)
        (when (eq system-type 'gnu/linux)
          latex)
-       ; writing papers in Emacs has never been so fun
+                                        ; writing papers in Emacs has never been so fun
        ;;lean              ; for folks with too much to prove
        ;;ledger            ; be audit you can be
        ;;lua               ; one-based indices? one-based indices
@@ -157,7 +156,7 @@
        ;;purescript        ; javascript, but functional
        (if (eq system-type 'gnu/linux)
            (python +lsp +pyright)            ; beautiful is better than ugly
-         (python +lsp ))
+         (python +lsp))
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
        ;;raku              ; the artist formerly known as perl6
