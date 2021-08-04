@@ -55,9 +55,9 @@
     :recipe (:host github :repo "io12/org-fragtog"))
   (package! emacs-livedown
     :recipe (:host github :repo "shime/emacs-livedown"))
-  (package! telega)
   (package! impatient-mode)
   (package! ein))
+(package! telega)
 (package! org-mime)
 (package! org-journal)
 (package! scroll-on-jump)
@@ -68,3 +68,6 @@
 (package! org-present)
 (when (eq system-type 'darwin)
   (package! exec-path-from-shell))
+
+
+(package! evil-matchit)
