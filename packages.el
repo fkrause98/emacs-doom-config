@@ -56,7 +56,10 @@
   (package! emacs-livedown
     :recipe (:host github :repo "shime/emacs-livedown"))
   (package! impatient-mode)
-  (package! ein))
+  (package! ein)
+  (progn
+    (package! xelb)
+    (package! exwm)))
 (package! telega)
 (package! org-mime)
 (package! org-journal)
@@ -69,5 +72,5 @@
 (when (eq system-type 'darwin)
   (package! exec-path-from-shell))
 
-
 (package! evil-matchit)
+

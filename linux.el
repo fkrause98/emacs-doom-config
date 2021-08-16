@@ -41,3 +41,9 @@
 
 
 (setq highlight-indent-guides-method 'character)
+
+
+;;; Experimental
+(require 'exwm)
+(require 'exwm-config)
+(exwm-config-default)
