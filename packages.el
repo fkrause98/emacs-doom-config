@@ -73,4 +73,3 @@
   (package! exec-path-from-shell))
 
 (package! evil-matchit)
-(package! doom-snippets :ignore t)
