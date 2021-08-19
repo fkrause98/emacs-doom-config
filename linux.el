@@ -30,14 +30,21 @@
   (progn
   (kill-new "http://localhost:8080/imp/")))
 ;;; Believe it or not, emacs has a mode for telegram
-(when (package-installed-p 'telega)
+(when (featurep 'telega)
   (telega-mode-line-mode 1)
   (add-hook 'telega-load-hook
             #'(lambda ()
                 (define-key global-map (kbd "C-c t") telega-prefix-map))))
 
 ;;; Elixir
-(add-to-list 'exec-path "~/elixir-ls/release")
+(add-to-list 'exec-path "/home/francisco/elixir-ls/release")
+(add-to-list 'exec-path "/home/francisco/.asdf")
 
 
 (setq highlight-indent-guides-method 'character)
+
+
+;;; Experimental
+(require 'exwm)
+(require 'exwm-config)
+(exwm-config-default)

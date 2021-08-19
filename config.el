@@ -171,3 +171,4 @@
 (set-face-attribute 'comint-highlight-prompt nil
                     :inherit nil)
 (global-evil-matchit-mode 1)
+
