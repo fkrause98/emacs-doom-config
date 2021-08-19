@@ -71,3 +71,4 @@
 
 
 (package! evil-matchit)
+(package! doom-snippets :ignore t)

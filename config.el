@@ -161,6 +161,8 @@
 
 ;;; Elisp / Lisp
 (load! "private-elisp/lisp-hooks")
+;;; Elixir
+(setq alchemist-mix-test-default-options '("--seed 0"))
 ;;; Web mode
 (setq web-mode-enable-current-element-highlight t)
 
