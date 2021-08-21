@@ -69,7 +69,6 @@
 (package! evil-cleverparens)
 (package! ox-reveal)
 (package! org-present)
-(when (eq system-type 'darwin)
-  (package! exec-path-from-shell))
+(package! exec-path-from-shell)
 
 (package! evil-matchit)
