@@ -17,6 +17,8 @@
       vterm-shell "/bin/zsh")
 ;;; Elixir
 (add-to-list 'exec-path "~/elixir-ls")
+(add-hook 'elixir-mode-hook
+        '(lambda () (setq-local company-minimum-prefix-length 3)))
 ;;; Modifiers
 (setq mac-command-modifier 'control)
 (setq mac-option-modifier 'meta)
