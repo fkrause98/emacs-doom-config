@@ -49,6 +49,7 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 (package! solaire-mode :disable t)
+(package! dtrt-indent :disable t)
 ;;(package! doom-themes :disable t)
 (when (eq system-type 'gnu-linux)
   (package! frogtag
@@ -70,5 +71,13 @@
 (package! ox-reveal)
 (package! org-present)
 (package! exec-path-from-shell)
-
 (package! evil-matchit)
+(package! tree-sitter)
+(package! tree-sitter-langs)
+(package! buffer-expose)
+
+(package! explain-pause-mode
+  :recipe (:host github :repo "lastquestion/explain-pause-mode"))
+
+(package! mix
+  :recipe (:host github :repo "ayrat555/mix.el"))
