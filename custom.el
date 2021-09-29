@@ -13,6 +13,9 @@
  '(livedown-open t)
  '(livedown-port 1337)
  '(package-selected-packages '(w3m use-package)))
+ '(package-selected-packages '(buffer-expose tree-sitter-langs tree-sitter use-package))
+ '(web-mode-attr-indent-offset 2)
+ '(web-mode-markup-indent-offset 2)
 (put 'customize-group 'disabled nil)
 (put 'customize-themes 'disabled nil)
 (custom-set-faces

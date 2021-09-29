@@ -214,3 +214,33 @@
 (global-tree-sitter-mode)
 (evil-global-set-key 'motion "j" 'evil-next-visual-line)
 (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+
+
+(after! projectile (setq projectile-project-root-files-bottom-up
+                         (remove ".git" projectile-project-root-files-bottom-up)))
+
+(setq eshell-term-name "xterm-256color")
+
+(setq company-idle-delay 0.3)
+(setq company-show-numbers t)
+(setq company-tooltip-limit 10)
+(setq company-minimum-prefix-length 2)
+(setq company-tooltip-align-annotations t)
+;; invert the navigation direction if the the completion popup-isearch-match
+;; is displayed on top (happens near the bottom of windows)
+(setq company-tooltip-flip-when-above t)
+(add-hook! 'web-mode
+           #'(setq evil-shift-width 2))
+
+(add-hook 'web-mode
+          (lambda ()
+            (setq web-mode-markup-indent-offset 2)))
+(defun funcs//tree-sitter-has-lang  (mode)
+  (assoc mode tree-sitter-major-mode-language-alist))
+
+(add-hook 'prog-mode-hook
+          #'(lambda ()
+              (tree-sitter-mode)
+              (when (funcs//tree-sitter-has-lang major-mode)
+                (tree-sitter-hl-mode))))
+(ivy-rich-mode)

@@ -47,9 +47,9 @@
 ;; ...or multiple packages
                                         ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
-                                        ;(unpin! t)
-(package! solaire-mode
-  :disable t)
+;(unpin! t)
+(package! solaire-mode :disable t)
+(package! dtrt-indent :disable t)
 ;;(package! doom-themes :disable t)
 (package! frogtag
   :recipe (:host github
@@ -69,6 +69,14 @@
 (package! ox-reveal)
 (package! org-present)
 (package! exec-path-from-shell)
+(package! evil-matchit)
+(package! tree-sitter)
+(package! tree-sitter-langs)
+(package! buffer-expose)
+(package! projectile-elixir)
+(package! mix
+  :recipe (:host github :repo "ayrat555/mix.el"))
+(package! all-the-icons-ivy-rich)
 (package! consult-dir)
 (package! command-log-mode)
 (package! elisp-format)
