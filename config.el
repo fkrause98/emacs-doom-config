@@ -5,8 +5,10 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-palenight)
+
 (setq doom-themes-enable-bold t
       doom-themes-enable-italic t)
+(setq doom-font "JetBrains Mono")
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -32,8 +34,6 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-
-
 (when (eq system-type 'gnu/linux)
   (load! "linux"))
 (when (eq system-type 'darwin)
@@ -64,7 +64,7 @@
                     'icons
                   'arrow))
 
-;;; Scrolling animations when jumping aroun
+;;; Scrolling animations when jumping around
 (with-eval-after-load 'evil
   (scroll-on-jump-advice-add evil-undo)
   (scroll-on-jump-advice-add evil-redo)
@@ -98,11 +98,11 @@
  '(livedown-browser 'firefox))  ; browser to use
 ;;; Black magic for C++
 (setq lsp-clients-clangd-args '("-j=3"
+                                "--cross-file-rename"
                                 "--background-index"
-                                "--clang-tidy"
-                                "--completion-style=detailed"
-                                "--header-insertion=never"))
-(after! lsp-clangd (set-lsp-priority! 'clangd 2))
+                                "--completion-style=bundled"
+                                "--header-insertion=never"
+                                "--limit-results=80"))
 (setq org-latex-listings 'minted
       org-latex-packages-alist '(("" "minted"))
       org-latex-pdf-process
@@ -132,13 +132,18 @@
           #'(progn
               (auto-revert-mode)))
 
+;;; Helm
+(after! helm
+  (progn
+    (helm-autoresize-mode)
+    (setq helm-swoop-speed-or-color t
+          helm-split-window-inside-p t
+          helm-autoresize-min-height 40)))
 ;;; Keybindings
 (map! :g "C-c C-b" 'eval-buffer)
 (map! :g "C-x C-j" 'dired)
 (map! :g "C-c f" 'helm-recentf)
 (map! :g "C-x C-b" 'helm-buffers-list)
-(map! :g "C-s" 'swiper)
-
 ;; I want backspace to go up a level if using Helm, like ivy
 (add-hook! 'helm-find-files-after-init-hook
   (map! :map helm-find-files-map
@@ -153,11 +158,14 @@
               'ruby-send-buffer)))
 ;;; C++
 (setq c-default-style "stroustrup")
-(setq-default tab-width 4)
+(add-hook 'c++-mode-hook
+          (lambda () (progn
+                  (setq-local company-minimum-prefix-length 4
+                              tab-width 4
+                              evil-shift-width 4))))
 
-(map! "M-x" 'helm-M-x)
 
-;;; Elisp / Lisp
+;;; Elisp / Lisp / Eshell
 (load! "private-elisp/lisp-hooks")
 ;;; Elixir
 (setq alchemist-mix-test-default-options '("--seed 0" "--trace"))
@@ -165,16 +173,44 @@
 (setq web-mode-enable-current-element-highlight t)
 
 ;;; Evil
-(modify-syntax-entry ?_ "w")
+;; (modify-syntax-entry ?_ "w")
 (set-face-attribute 'comint-highlight-prompt nil
                     :inherit nil)
 (global-evil-matchit-mode 1)
+;; (setq evil-insert-state-map (make-sparse-keymap))
+;; (define-key evil-insert-state-map (kbd "<escape>") 'evil-normal-state)
+;; (define-key evil-insert-state-map (kbd "C-o") 'evil)
 
-(setq company-idle-delay 0.5)
-(setq company-show-numbers t)
-(setq company-tooltip-limit 10)
-(setq company-minimum-prefix-length 2)
-(setq company-tooltip-align-annotations t)
-;; invert the navigation direction if the the completion popup-isearch-match
-;; is displayed on top (happens near the bottom of windows)
-(setq company-tooltip-flip-when-above t)
+
+;;; Company mode
+(setq company-idle-delay 0.2
+      company-show-numbers t
+      company-tooltip-limit 10
+      company-minimum-prefix-length 4
+      company-tooltip-align-annotations t
+      company-tooltip-flip-when-above nil
+      c-syntactic-indentation t)
+(add-hook 'company-mode-hook
+          #'(lambda ()
+              (define-key company-active-map (kbd "<return>") nil)
+              (define-key company-active-map (kbd "RET") nil)))
+;; (after! comp--all-builtin-types)
+;;; Python
+;; (when (fboundp 'elpy-enable)
+;; (after! python
+;;   (set-company-backend! 'python-mode 'elpy-company-backend))
+;;   (progn (elpy-enable)
+;;          (add-hook 'python-mode-hook
+;;                    (lambda () 'elpy-mode))))
+;; (after! python
+;;   (set-company-backend! 'python-mode 'company-anaconda))
+(setq read-process-output-max (* 1 1024 1024))
+
+;;; Grip
+
+(setq browse-url-generic-program "firefox"
+      grip-preview-use-webkit nil)
+
+(global-tree-sitter-mode)
+(evil-global-set-key 'motion "j" 'evil-next-visual-line)
+(evil-global-set-key 'motion "k" 'evil-previous-visual-line)
