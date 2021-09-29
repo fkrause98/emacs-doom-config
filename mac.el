@@ -10,11 +10,11 @@
 ;; font string. You generally only need these two:
 ;; (when (display-graphic-p)
 ;;; Use Fira Code if available
-(when (member "Fira Code" (font-family-list))
-              (setq doom-font "Fira Code"))
+;; (when (member "Fira Code" (font-family-list))
+;;               (setq doom-font "Fira Code"))
 ;;; Shell to use
 (setq shell-file-name "/bin/zsh"
-      vterm-shell "/bin/zsh")
+      vterm-shell "/usr/local/bin/zsh")
 ;;; Elixir
 (add-to-list 'exec-path "~/elixir-ls")
 ;;; Modifiers
@@ -22,5 +22,4 @@
 (setq mac-option-modifier 'meta)
 (setq mac-right-option-modifier 'meta)
 (setq mac-pass-command-to-system nil)
-
 (exec-path-from-shell-initialize)

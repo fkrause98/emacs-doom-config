@@ -75,9 +75,11 @@
 (package! tree-sitter)
 (package! tree-sitter-langs)
 (package! buffer-expose)
+(package! projectile-elixir)
 
 (package! explain-pause-mode
   :recipe (:host github :repo "lastquestion/explain-pause-mode"))
 
 (package! mix
   :recipe (:host github :repo "ayrat555/mix.el"))
+(package! all-the-icons-ivy-rich)
