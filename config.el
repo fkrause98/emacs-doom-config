@@ -96,15 +96,13 @@
  '(livedown-open t)        ; automatically open the browser window
  '(livedown-port 1337)     ; port for livedown server
  '(livedown-browser 'firefox))  ; browser to use
+;;; Black magic for C++
 (setq lsp-clients-clangd-args '("-j=3"
                                 "--background-index"
                                 "--clang-tidy"
                                 "--completion-style=detailed"
                                 "--header-insertion=never"))
-;;; Black magic for C++
 (after! lsp-clangd (set-lsp-priority! 'clangd 2))
-(setq elfeed-feeds
-      '("https://www.clarin.com/rss/lo-ultimo/"))
 (setq org-latex-listings 'minted
       org-latex-packages-alist '(("" "minted"))
       org-latex-pdf-process

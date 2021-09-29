@@ -45,6 +45,6 @@
 
 
 ;;; Experimental
-(require 'exwm)
-(require 'exwm-config)
-(exwm-config-default)
+;; (require 'exwm)
+;; (require 'exwm-config)
+;; (exwm-config-default)
