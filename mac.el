@@ -25,3 +25,5 @@
 (setq mac-right-option-modifier 'meta)
 (setq mac-pass-command-to-system nil)
 (exec-path-from-shell-initialize)
+(unless (display-graphic-p)
+  (global-blamer-mode 1))

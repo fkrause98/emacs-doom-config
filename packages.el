@@ -47,10 +47,12 @@
 ;; ...or multiple packages
                                         ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
-;(unpin! t)
-(package! solaire-mode :disable t)
-(package! dtrt-indent :disable t)
-;;(package! doom-themes :disable t)
+                                        ;(unpin! t)
+(package! solaire-mode
+  :disable t)
+(package! dtrt-indent
+  :disable t)
+(package! flycheck-popup-tip :disable t)
 (package! frogtag
   :recipe (:host github
            :repo "io12/org-fragtog"))
@@ -73,14 +75,23 @@
 (package! tree-sitter)
 (package! tree-sitter-langs)
 (package! buffer-expose)
-(package! projectile-elixir)
 (package! mix
-  :recipe (:host github :repo "ayrat555/mix.el"))
+  :recipe (:host github
+           :repo "ayrat555/mix.el"))
 (package! all-the-icons-ivy-rich)
 (package! consult-dir)
 (package! command-log-mode)
-(package! elisp-format)
-(package! elpy)
-(package! helm-swoop)
 (package! tree-sitter)
 (package! tree-sitter-langs)
+(package! emamux)
+(package! aggressive-indent)
+(package! ob-restclient :recipe (:host github
+                   :repo "alf/ob-restclient.el"))
+;; (package! beacon :recipe (:host github
+;;                    :repo "Malabarba/beacon"))
+(package! crux)
+(package! dired-sidebar)
+(package! slack)
+(package! blamer :recipe (:host github :repo "artawower/blamer.el"))
+(package! ob-restclient)
+(package! ox-gfm)
