@@ -35,76 +35,62 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+;;; OS
 ;; Config for Linux distros.
 (when (eq system-type 'gnu/linux)
   (load! "linux"))
 ;; Config for MacOs.
 (when (eq system-type 'darwin)
   (load! "mac"))
-;;; Private elisp
-(let ((no-dots-regex "^[^\.].*$") (private-elisp-fldr (concat doom-private-dir "private-elisp")))
+;;; Load files inside the "private-elisp" folder.
+(let ((no-dots-regex "^[^\.].*$")
+      (private-elisp-fldr (concat doom-private-dir "private-elisp")))
   (dolist
       (file (directory-files private-elisp-fldr t no-dots-regex))
         (load!  file)))
-;;; Image for the init dashboard
+
+;;; Dashboard
 (when (or (display-graphic-p)
            (daemonp))
    (random-banner-image (expand-file-name "splash/" doom-private-dir)))
+(add-hook
+ 'dashboard-mode-hook
+ #'(lambda ()
+     (perfect-margin-mode -1)))
 ;;; Scrolling
 (setq scroll-conservatively 101)
-;;; Indent guides options
-;; (if (display-graphic-p)
-;;     (setq highlight-indent-guides-method 'bitmap)
-;;   (setq highlight-indent-guides-method 'fill))
 ;;; Org mode
-(setq org-re-reveal-mousewheel t)
-(setq org-edit-src-turn-on-auto-save t org-src-preserve-indentation t org-use-sub-superscripts t)
-(add-hook 'org-mode-hook
-          #'(lambda ()
-              (company-mode -1)))
-;;; Some personal org options, check my-org-bindings.el for the specifics.
-(require 'my-org-bindings)
-(require 'my-org-mode-hooks)
-(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+(setq
+ org-re-reveal-mousewheel t
+ org-edit-src-turn-on-auto-save t
+ org-src-preserve-indentation t
+ org-use-sub-superscripts t)
+(setq neo-theme
+      (if (display-graphic-p)
+          'icons
+        'arrow))
 
-;;; Scrolling animations when jumping around
-;; (with-eval-after-load 'evil (scroll-on-jump-advice-add evil-undo)
-;;                       (scroll-on-jump-advice-add evil-redo)
-;;                       (scroll-on-jump-advice-add evil-jump-item)
-;;                       (scroll-on-jump-advice-add evil-jump-forward)
-;;                       (scroll-on-jump-advice-add evil-jump-backward)
-;;                       (scroll-on-jump-advice-add evil-ex-search-next)
-;;                       (scroll-on-jump-advice-add evil-ex-search-previous)
-;;                       (scroll-on-jump-advice-add evil-forward-paragraph)
-;;                       (scroll-on-jump-advice-add evil-backward-paragraph)
-;;                       ;; Actions that themselves scroll.
-;;                       (scroll-on-jump-with-scroll-advice-add evil-scroll-down)
-;;                       (scroll-on-jump-with-scroll-advice-add evil-scroll-up)
-;;                       (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-center)
-;;                       (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-top)
-;;                       (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-bottom))
-;; (with-eval-after-load 'goto-chg (scroll-on-jump-advice-add goto-last-change)
-;;                       (scroll-on-jump-advice-add goto-last-change-reverse))
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((restclient . t)))
 
-;; (global-set-key (kbd "<C-M-next>")
-;;                 (scroll-on-jump-interactive 'diff-hl-next-hunk))
-;; (global-set-key (kbd "<C-M-prior>")
-;;                 (scroll-on-jump-interactive 'diff-hl-previous-hunk))
-
-;; (setq scroll-on-jump-use-curve t)
-
-
+;;; Markdown
 (custom-set-variables '(livedown-autostart nil) ; automatically open preview when opening markdown files
                       '(livedown-open t) ; automatically open the browser window
                       '(livedown-port 1337)         ; port for livedown server
                       '(livedown-browser 'firefox)) ; browser to use
-;;; Black magic for C++
+;; Grip
+(setq browse-url-generic-program "firefox" grip-preview-use-webkit nil)
+;;; C++
+;;Black magic
 (setq lsp-clients-clangd-args '("-j=3" "--cross-file-rename" "--background-index"
                                 "--completion-style=bundled" "--header-insertion=never"
                                 "--limit-results=80"))
-(setq org-latex-listings 'minted org-latex-packages-alist '(("" "minted")) org-latex-pdf-process '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-                                                                                                   "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-                                                                                                   "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+(setq org-latex-listings 'minted
+      org-latex-packages-alist '(("" "minted"))
+      org-latex-pdf-process '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+                              "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+                              "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 (setq org-latex-minted-options '(("breaklines" "true")
                                  ("breakanywhere" "true")))
 (setq +format-on-save-enabled-modes '(not emacs-lisp-mode ; elisp's mechanisms are good enough
@@ -123,21 +109,33 @@
         ((eq display-line-numbers 't)
          (setq display-line-numbers 'relative))))
 
+(defun replace-with-indices(to-replace)
+       ;; Replace every occurrence of to-replace appending a number
+       ;; to the end, starts counting from 0
+  (interactive "MInput Regex: ")
+   (let ((i 0))
+     (while (search-forward-regexp to-replace nil t)
+       (let ((replacement
+              (concat to-replace
+                      (number-to-string i))))
+         (when (y-or-n-p "Replace?")
+             (replace-match replacement)
+          (setq i (1+ i)))))))
+
 ;;; PDF
 (add-hook 'pdf-view #'(progn (auto-revert-mode)))
 
-;;; Helm
-(after! helm (progn (helm-autoresize-mode)
-                    (setq helm-swoop-speed-or-color t helm-split-window-inside-p t
-                          helm-autoresize-min-height 40)))
-;;; Keybindings
+;;; Random Keybindings
 (map! :g "C-c C-b" 'eval-buffer)
 (map! :g "C-x C-j" 'dired)
-(map! :g "C-c f" 'helm-recentf)
-(map! :g "C-x C-b" 'helm-buffers-list)
-;; I want backspace to go up a level if using Helm, like ivy
-(add-hook! 'helm-find-files-after-init-hook (map! :map helm-find-files-map
-                                                  "<DEL>" #'helm-find-files-up-one-level))
+(map! :g "C-c f" 'counsel-recentf)
+(map! :g "C-x C-b" '+ivy/switch-workspace-buffer)
+;; Use C-{k,j} to move in ielm
+(map! :map inferior-emacs-lisp-mode-map
+      :i "C-k" 'comint-previous-input
+      :i "C-j" 'comint-next-input
+      :n "C-k" 'comint-previous-input
+      :n "C-j" 'comint-next-input)
 ;;; Ruby
 (add-hook 'ruby-mode (progn
                        (evil-define-key
@@ -150,14 +148,10 @@
             (progn
               (setq-local
                company-minimum-prefix-length 4
-               tab-width 4 e
-               vil-shift-width 4))))
+               tab-width 4
+               evil-shift-width 4))))
 
 
-;;; Elisp / Lisp
-(load! "private-elisp/lisp-hooks")
-(add-hook 'emacs-lisp-mode-hook
-          'evil-cleverparens-mode)
 ;;; Eshell
 (eshell-vterm-mode)
 (defalias 'eshell/v 'eshell-vterm-exec-visual)
@@ -166,52 +160,36 @@
           #'(lambda ()
               (company-mode -1)
               (esh-autosuggest-mode)))
+(setq eshell-term-name "xterm-256color")
 ;;; Elixir
 (load! "elixir")
 ;;; Web mode
+;; Useful for higlighting tags.
 (setq web-mode-enable-current-element-highlight t)
+(add-hook 'web-mode-hook
+          (lambda ()
+            ;; Indent to 2 spaces.
+            (setq web-mode-markup-indent-offset 2)
+            (setq web-mode-css-indent-offset 2)
+            (setq web-mode-code-indent-offset 2)
+            (setq web-mode-enable-current-column-highlight t)
+            (setq evil-shift-width 2)))
 
 ;;; Evil
-;; (modify-syntax-entry ?_ "w")
+(evil-global-set-key 'motion "j" 'evil-next-visual-line)
+(evil-global-set-key 'motion "k" 'evil-previous-visual-line)
 (set-face-attribute 'comint-highlight-prompt nil
                     :inherit nil)
 (global-evil-matchit-mode 1)
-;; (setq evil-insert-state-map (make-sparse-keymap))
-;; (define-key evil-insert-state-map (kbd "<escape>") 'evil-normal-state)
-;; (define-key evil-insert-state-map (kbd "C-o") 'evil)
-
 
 ;;; Company mode
-(setq company-idle-delay 0.2 company-show-numbers t company-tooltip-limit 10
-      company-minimum-prefix-length 4 company-tooltip-align-annotations t
-      company-tooltip-flip-when-above nil c-syntactic-indentation t)
-;; (after! comp--all-builtin-types)
-;;; Python
-;; (when (fboundp 'elpy-enable)
-;; (after! python
-;;   (set-company-backend! 'python-mode 'elpy-company-backend))
-;;   (progn (elpy-enable)
-;;          (add-hook 'python-mode-hook
-;;                    (lambda () 'elpy-mode))))
-;; (after! python
-;;   (set-company-backend! 'python-mode 'company-anaconda))
-(setq read-process-output-max (* 1 1024 1024))
-
-;;; Grip
-
-(setq browse-url-generic-program "firefox" grip-preview-use-webkit nil)
-
-;; (global-tree-sitter-mode)
-(evil-global-set-key 'motion "j" 'evil-next-visual-line)
-(evil-global-set-key 'motion "k" 'evil-previous-visual-line)
-
-
-(after! projectile
-  (setq projectile-project-root-files-bottom-up (remove ".git"
-                                                        projectile-project-root-files-bottom-up)))
-
-(setq eshell-term-name "xterm-256color")
-
+(setq company-idle-delay 0.2
+      company-show-numbers t
+      company-tooltip-limit 10
+      company-minimum-prefix-length 4
+      company-tooltip-align-annotations t
+      company-tooltip-flip-when-above nil
+      c-syntactic-indentation t)
 (setq company-idle-delay 0.3)
 (setq company-show-numbers t)
 (setq company-tooltip-limit 10)
@@ -220,31 +198,31 @@
 ;; invert the navigation direction if the the completion popup-isearch-match
 ;; is displayed on top (happens near the bottom of windows)
 (setq company-tooltip-flip-when-above t)
+;; (setq read-process-output-max (* 1 1024 1024))
 
-(add-hook 'web-mode-hook
-          (lambda ()
-            (setq web-mode-markup-indent-offset 2)
-            (setq evil-shift-width 2)))
-;; (defun funcs//tree-sitter-has-lang  (mode)
-;;   (assoc mode tree-sitter-major-mode-language-alist))
 
-(add-hook 'prog-mode-hook
-          #'(lambda ()
-             ;; (when (funcs//tree-sitter-has-lang major-mode)
-             ;;   (tree-sitter-hl-mode))
-             (rainbow-delimiters-mode)))
+;;; Projectile
+(after! projectile
+  (setq projectile-project-root-files-bottom-up
+        (remove
+         ".git"
+         projectile-project-root-files-bottom-up)))
+
+;;; Prog mode
+(add-hook
+ 'prog-mode-hook
+ #'(lambda ()
+     ;; To almost center text
+     (perfect-margin-mode)
+     ;; Rainbow parens
+     (rainbow-delimiters-mode)))
+;;; Ivy
+;; Some fancy icons for ivy
 (ivy-rich-mode)
 (all-the-icons-ivy-rich-mode)
 
-;;; Term mode
-(add-hook 'term-mode-hook 'my-term-mode-hook)
-(defun my-term-mode-hook ()
-  ;; https://debbugs.gnu.org/cgi/bugreport.cgi?bug=20611
-  (setq bidi-paragraph-direction 'left-to-right))
-
-
-(use-package blamer
-  :defer 20
+;; Blamer
+(use-package! blamer
   :custom
   (blamer-idle-time 0.3)
   (blamer-min-offset 70)
@@ -254,23 +232,31 @@
                     :height 140
                     :italic t))))
 
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((restclient . t)))
-
-
+;;; LSP
 (after! lsp-ui
   (setq lsp-ui-doc-enable nil))
 
 
-(add-hook
- 'dashboard-mode-hook
- #'(lambda ()
-     (perfect-margin-mode -1)))
-(defun neq (x y)
-  (not (eq x y)))
-(add-hook
- 'prog-mode-hook
- #'(lambda ()
-     (perfect-margin-mode)))
-;; (perfect-margin-mode)
+;;; SQL
+(add-hook 'sql-interactive-mode-hook
+          (lambda ()
+            (toggle-truncate-lines)))
+;; Helps to see better, a little at least.
+(when (display-graphic-p)
+  (setq-default line-spacing 2))
+
+
+
+;;; Treesitter
+;; Compile grammars instead of fetching pre-compiled binaries
+;; as they currently don't work with Apple's M1 chip
+(use-package! tree-sitter
+    :config (setq tsc-dyn-get-from '(:compilation)))
+(use-package! tree-sitter-langs)
+(defun funcs//tree-sitter-has-lang  (mode)
+  (assoc mode tree-sitter-major-mode-language-alist))
+(add-hook 'prog-mode-hook
+          #'(lambda ()
+             (when (funcs//tree-sitter-has-lang major-mode)
+               (tree-sitter-hl-mode))
+             (rainbow-delimiters-mode)))
