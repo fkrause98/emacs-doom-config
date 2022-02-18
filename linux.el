@@ -38,6 +38,4 @@
 
 ;;; Elixir
 (setq elixir-ls-folder "/home/francisco/elixir-ls/release")
-
-
 (setq highlight-indent-guides-method 'character)
