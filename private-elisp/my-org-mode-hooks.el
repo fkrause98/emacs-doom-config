@@ -12,4 +12,6 @@
                             (setq org-pretty-entities t)))
 (add-hook 'org-mode-hook 'org-superstar-mode)
 (add-hook 'org-mode-hook 'my-custom-entities-for-org)
-
+(add-hook 'org-mode-hook
+          #'(lambda ()
+              (company-mode -1)))
