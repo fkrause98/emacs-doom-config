@@ -48,8 +48,8 @@
                                         ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
                                         ;(unpin! t)
-(package! solaire-mode
-  :disable t)
+;; (package! solaire-mode
+;;   :disable t)
 (package! dtrt-indent
   :disable t)
 (package! flycheck-popup-tip :disable t)
@@ -61,12 +61,14 @@
            :repo "shime/emacs-livedown"))
 (package! impatient-mode)
 (package! xelb)
-(package! exwm)
+;; (package! exwm)
 (package! telega)
 (package! org-mime)
-(package! scroll-on-jump)
+
+
+(when (eq system-type 'gnu/linux)
+  (package! scroll-on-jump))
 (package! inf-elixir)
-(package! evil-cleverparens)
 (package! evil-matchit)
 (package! ox-reveal)
 (package! org-present)
@@ -74,7 +76,8 @@
 (package! evil-matchit)
 (package! tree-sitter)
 (package! tree-sitter-langs)
-(package! buffer-expose)
+(package! perfect-margin)
+(package! company-web)
 (package! mix
   :recipe (:host github
            :repo "ayrat555/mix.el"))
@@ -87,11 +90,23 @@
 (package! aggressive-indent)
 (package! ob-restclient :recipe (:host github
                    :repo "alf/ob-restclient.el"))
-;; (package! beacon :recipe (:host github
-;;                    :repo "Malabarba/beacon"))
 (package! crux)
 (package! dired-sidebar)
 (package! slack)
 (package! blamer :recipe (:host github :repo "artawower/blamer.el"))
 (package! ob-restclient)
 (package! ox-gfm)
+;; Eshell goodies
+(package! project-shells)
+(package! esh-autosuggest)
+(package! eshell-vterm)
+(package! eshell-up)
+(package! code-review)
+(package! kaolin-themes)
+(package! gruvbox-theme)
+(package! ox-slack)
+(package! request)
+(package! blamer)
+(package! dired-sidebar)
+(package! tree-sitter)
+(package! tree-sitter-langs)
