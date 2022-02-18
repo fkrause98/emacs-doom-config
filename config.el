@@ -167,15 +167,7 @@
               (company-mode -1)
               (esh-autosuggest-mode)))
 ;;; Elixir
-;; (setq alchemist-mix-test-default-options '("--seed 0" "--trace"))
-(setq +format-on-save-enabled-modes
-      '(t elixir-mode))
-(setq alchemist-mix-test-default-options nil)
-(add-hook 'elixir-mode-hook
-          #'(lambda()
-              (setq company-idle-delay 0.2)))
-(add-hook 'elixir-mode-hook 'which-function-mode)
-(setq yas-also-auto-indent-first-line t)
+(load! "elixir")
 ;;; Web mode
 (setq web-mode-enable-current-element-highlight t)
 
