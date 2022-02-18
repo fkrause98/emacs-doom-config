@@ -6,12 +6,13 @@
 (setq doom-theme 'doom-palenight)
 
 (setq doom-themes-enable-bold t doom-themes-enable-italic t)
-(when (eq system-type 'gnu/linux)
-  (setq doom-font "JetBrains Mono"))
-
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(setq org-directory
+      (if (file-exists-p "~/Documents")
+          "~/Documents/org/"
+          "~/Documentos/org/"))
+
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -36,7 +37,10 @@
 (when (eq system-type 'gnu/linux)
   (load! "linux"))
 (when (eq system-type 'darwin)
-  (load! "mac"))
+  (load! "mac")
+  (setq doom-font "Fira Code")
+  (unless (boundp 'server-running-p)
+    (server-start)))
 ;;; Private elisp
 (add-load-path! "private-elisp")
 ;;; Image for the init dashboard
@@ -54,36 +58,39 @@
 ;;; Org mode
 (setq org-re-reveal-mousewheel t)
 (setq org-edit-src-turn-on-auto-save t org-src-preserve-indentation t org-use-sub-superscripts t)
+(add-hook 'org-mode-hook
+          #'(lambda ()
+              (company-mode -1)))
 ;;; Some personal org options, check my-org-bindings.el for the specifics.
 (require 'my-org-bindings)
 (require 'my-org-mode-hooks)
 (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 
 ;;; Scrolling animations when jumping around
-(with-eval-after-load 'evil (scroll-on-jump-advice-add evil-undo)
-                      (scroll-on-jump-advice-add evil-redo)
-                      (scroll-on-jump-advice-add evil-jump-item)
-                      (scroll-on-jump-advice-add evil-jump-forward)
-                      (scroll-on-jump-advice-add evil-jump-backward)
-                      (scroll-on-jump-advice-add evil-ex-search-next)
-                      (scroll-on-jump-advice-add evil-ex-search-previous)
-                      (scroll-on-jump-advice-add evil-forward-paragraph)
-                      (scroll-on-jump-advice-add evil-backward-paragraph)
-                      ;; Actions that themselves scroll.
-                      (scroll-on-jump-with-scroll-advice-add evil-scroll-down)
-                      (scroll-on-jump-with-scroll-advice-add evil-scroll-up)
-                      (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-center)
-                      (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-top)
-                      (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-bottom))
-(with-eval-after-load 'goto-chg (scroll-on-jump-advice-add goto-last-change)
-                      (scroll-on-jump-advice-add goto-last-change-reverse))
+;; (with-eval-after-load 'evil (scroll-on-jump-advice-add evil-undo)
+;;                       (scroll-on-jump-advice-add evil-redo)
+;;                       (scroll-on-jump-advice-add evil-jump-item)
+;;                       (scroll-on-jump-advice-add evil-jump-forward)
+;;                       (scroll-on-jump-advice-add evil-jump-backward)
+;;                       (scroll-on-jump-advice-add evil-ex-search-next)
+;;                       (scroll-on-jump-advice-add evil-ex-search-previous)
+;;                       (scroll-on-jump-advice-add evil-forward-paragraph)
+;;                       (scroll-on-jump-advice-add evil-backward-paragraph)
+;;                       ;; Actions that themselves scroll.
+;;                       (scroll-on-jump-with-scroll-advice-add evil-scroll-down)
+;;                       (scroll-on-jump-with-scroll-advice-add evil-scroll-up)
+;;                       (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-center)
+;;                       (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-top)
+;;                       (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-bottom))
+;; (with-eval-after-load 'goto-chg (scroll-on-jump-advice-add goto-last-change)
+;;                       (scroll-on-jump-advice-add goto-last-change-reverse))
 
-(global-set-key (kbd "<C-M-next>")
-                (scroll-on-jump-interactive 'diff-hl-next-hunk))
-(global-set-key (kbd "<C-M-prior>")
-                (scroll-on-jump-interactive 'diff-hl-previous-hunk))
+;; (global-set-key (kbd "<C-M-next>")
+;;                 (scroll-on-jump-interactive 'diff-hl-next-hunk))
+;; (global-set-key (kbd "<C-M-prior>")
+;;                 (scroll-on-jump-interactive 'diff-hl-previous-hunk))
 
-(setq scroll-on-jump-use-curve t)
+;; (setq scroll-on-jump-use-curve t)
 
 
 (custom-set-variables '(livedown-autostart nil) ; automatically open preview when opening markdown files
@@ -131,22 +138,33 @@
 (add-hook! 'helm-find-files-after-init-hook (map! :map helm-find-files-map
                                                   "<DEL>" #'helm-find-files-up-one-level))
 ;;; Ruby
-(add-hook 'ruby-mode (progn (evil-define-key '(normal insert) ruby-mode-map (kbd "C-c C-c")
+(add-hook 'ruby-mode (progn
+                       (evil-define-key
+                         '(normal insert) ruby-mode-map (kbd "C-c C-c")
                               'ruby-send-buffer)))
 ;;; C++
 (setq c-default-style "stroustrup")
 (add-hook 'c++-mode-hook
           (lambda ()
-            (progn (setq-local company-minimum-prefix-length 4 tab-width 4 evil-shift-width 4))))
+            (progn
+              (setq-local
+               company-minimum-prefix-length 4
+               tab-width 4 e
+               vil-shift-width 4))))
 
 
-;;; Elisp / Lisp / Eshell
+;;; Elisp / Lisp
 (load! "private-elisp/lisp-hooks")
-(add-hook 'eshell-mode-hook
-          #'(lambda ()
-             (company-mode -1)))
 (add-hook 'emacs-lisp-mode-hook
           'evil-cleverparens-mode)
+;;; Eshell
+(eshell-vterm-mode)
+(defalias 'eshell/v 'eshell-vterm-exec-visual)
+(setq eshell-up-ignore-case nil)
+(add-hook 'eshell-mode-hook
+          #'(lambda ()
+              (company-mode -1)
+              (esh-autosuggest-mode)))
 ;;; Elixir
 ;; (setq alchemist-mix-test-default-options '("--seed 0" "--trace"))
 (setq +format-on-save-enabled-modes
@@ -190,7 +208,7 @@
 
 (setq browse-url-generic-program "firefox" grip-preview-use-webkit nil)
 
-(global-tree-sitter-mode)
+;; (global-tree-sitter-mode)
 (evil-global-set-key 'motion "j" 'evil-next-visual-line)
 (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
 
@@ -209,19 +227,18 @@
 ;; invert the navigation direction if the the completion popup-isearch-match
 ;; is displayed on top (happens near the bottom of windows)
 (setq company-tooltip-flip-when-above t)
-(add-hook! 'web-mode
-           #'(setq evil-shift-width 2))
 
-(add-hook 'web-mode
+(add-hook 'web-mode-hook
           (lambda ()
-            (setq web-mode-markup-indent-offset 2)))
-(defun funcs//tree-sitter-has-lang  (mode)
-  (assoc mode tree-sitter-major-mode-language-alist))
+            (setq web-mode-markup-indent-offset 2)
+            (setq evil-shift-width 2)))
+;; (defun funcs//tree-sitter-has-lang  (mode)
+;;   (assoc mode tree-sitter-major-mode-language-alist))
 
 (add-hook 'prog-mode-hook
           #'(lambda ()
-             (when (funcs//tree-sitter-has-lang major-mode)
-               (tree-sitter-hl-mode))
+             ;; (when (funcs//tree-sitter-has-lang major-mode)
+             ;;   (tree-sitter-hl-mode))
              (rainbow-delimiters-mode)))
 (ivy-rich-mode)
 (all-the-icons-ivy-rich-mode)
@@ -231,6 +248,7 @@
 (defun my-term-mode-hook ()
   ;; https://debbugs.gnu.org/cgi/bugreport.cgi?bug=20611
   (setq bidi-paragraph-direction 'left-to-right))
+
 
 (use-package blamer
   :defer 20
@@ -250,3 +268,16 @@
 
 (after! lsp-ui
   (setq lsp-ui-doc-enable nil))
+
+
+(add-hook
+ 'dashboard-mode-hook
+ #'(lambda ()
+     (perfect-margin-mode -1)))
+(defun neq (x y)
+  (not (eq x y)))
+(add-hook
+ 'prog-mode-hook
+ #'(lambda ()
+     (perfect-margin-mode)))
+;; (perfect-margin-mode)
