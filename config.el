@@ -34,21 +34,22 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+;; Config for Linux distros.
 (when (eq system-type 'gnu/linux)
   (load! "linux"))
+;; Config for MacOs.
 (when (eq system-type 'darwin)
-  (load! "mac")
-  (setq doom-font "Fira Code")
-  (unless (boundp 'server-running-p)
-    (server-start)))
+  (load! "mac"))
 ;;; Private elisp
-(add-load-path! "private-elisp")
+(let ((no-dots-regex "^[^\.].*$") (private-elisp-fldr (concat doom-private-dir "private-elisp")))
+  (dolist
+      (file (directory-files private-elisp-fldr t no-dots-regex))
+        (load!  file)))
 ;;; Image for the init dashboard
 (when (or (display-graphic-p)
-          (daemonp))
-  (progn (load! "private-elisp/random-banner")
-         (load! "private-elisp/screenshot")
-         (random-banner-image (expand-file-name "splash/" doom-private-dir))))
+           (daemonp))
+   (random-banner-image (expand-file-name "splash/" doom-private-dir)))
 ;;; Scrolling
 (setq scroll-conservatively 101)
 ;;; Indent guides options
