@@ -39,3 +39,9 @@
 ;; Start server if not running
 (unless (boundp 'server-running-p)
     (server-start))
+
+;;; Tree-sitter
+;; Temporary solution for tree sitter in Mac + ARM.
+(use-package! tree-sitter
+    :config (setq tsc-dyn-get-from '(:compilation)))
+(use-package! tree-sitter-langs)
