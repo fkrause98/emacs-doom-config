@@ -37,14 +37,7 @@
                 (define-key global-map (kbd "C-c t") telega-prefix-map))))
 
 ;;; Elixir
-(add-to-list 'exec-path "/home/francisco/elixir-ls/release")
-(add-to-list 'exec-path "/home/francisco/.asdf")
+(setq elixir-ls-folder "/home/francisco/elixir-ls/release")
 
 
 (setq highlight-indent-guides-method 'character)
-
-
-;;; Experimental
-;; (require 'exwm)
-;; (require 'exwm-config)
-;; (exwm-config-default)
