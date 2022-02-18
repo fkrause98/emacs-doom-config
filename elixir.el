@@ -14,7 +14,7 @@
 ;; Disable for reasons I don't remember
 (setq alchemist-mix-test-default-options nil)
 
-(defun elixir-variables-hook ()
+(defun elixir/variables-hook ()
   (setq company-idle-delay 0.2
         yas-also-auto-indent-first-line t)
   ;; Company can be a bit annoying with its
@@ -23,7 +23,7 @@
   (setq-local company-minimum-prefix-length 3))
 ;; Show which function I'm visiting in the modeline
 ;; (add-hook 'elixir-mode-hook 'which-function-mode)
-(dolist (func '('elixir-variables-hook 'which-function-mode))
+(dolist (func '('elixir/variables-hook 'which-function-mode))
   (add-hook 'elixir-mode-hook func))
 ;; Workaround to enable running credo after lsp
 (defvar-local my/flycheck-local-cache nil)
