@@ -1,9 +1,9 @@
 ;;; ../emacs-doom-config/elixir.el -*- lexical-binding: t; -*-
-(defun check-for-elixir-ls ()
-    (if (file-exists-p elixir-ls-folder)
+;; Check if I have the elixir language server
+;; locally installed.
+(if (file-exists-p elixir-ls-folder)
         (add-to-list 'exec-path "~/elixir-ls")
-      (warn (format "Missing Elixir language server folder in: %s" elixir-ls-folder))))
-(check-for-elixir-ls)
+        (warn (format "Missing Elixir language server folder in: %s" elixir-ls-folder)))
 
 ;; To run tests with seed 0
 ;; (setq alchemist-mix-test-default-options '("--seed 0" "--trace"))
@@ -14,17 +14,17 @@
 ;; Disable for reasons I don't remember
 (setq alchemist-mix-test-default-options nil)
 
-;; Alternate delay for company mode.
-;; Indent first line for snippets, can be annoying if
-;; set to nil, so I enable it.
-(add-hook 'elixir-mode-hook
-          #'(lambda()
-              (setq company-idle-delay 0.2
-                    yas-also-auto-indent-first-line t)))
-
+(defun elixir-variables-hook ()
+  (setq company-idle-delay 0.2
+        yas-also-auto-indent-first-line t)
+  ;; Company can be a bit annoying with its
+  ;; suggestions, as the default value
+  ;;  of this variable is 2.
+  (setq-local company-minimum-prefix-length 3))
 ;; Show which function I'm visiting in the modeline
-(add-hook 'elixir-mode-hook 'which-function-mode)
-
+;; (add-hook 'elixir-mode-hook 'which-function-mode)
+(dolist (func '('elixir-variables-hook 'which-function-mode))
+  (add-hook 'elixir-mode-hook func))
 ;; Workaround to enable running credo after lsp
 (defvar-local my/flycheck-local-cache nil)
 (defun my/flycheck-checker-get (fn checker property)

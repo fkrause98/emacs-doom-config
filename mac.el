@@ -22,12 +22,6 @@
       vterm-shell "/opt/homebrew/bin/fish")
 ;;; Elixir
 (setq elixir-ls-folder "~/elixir-ls")
-
-
-;; Company can be a bit annoying whit its
-;; suggestions.
-(add-hook 'elixir-mode-hook
-        '(lambda () (setq-local company-minimum-prefix-length 3)))
 ;;; Modifiers
 ;; One thing that mac does well is
 ;; the command key, let's use it.
