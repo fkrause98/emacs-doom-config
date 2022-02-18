@@ -247,12 +247,20 @@
 
 
 
-;;; Treesitter
+;;; TEMPORARY UNTIL DOOM UPSTREAM ADDS TREE-SITTER
+;; Treesitter
 ;; Compile grammars instead of fetching pre-compiled binaries
 ;; as they currently don't work with Apple's M1 chip
-(use-package! tree-sitter
-    :config (setq tsc-dyn-get-from '(:compilation)))
-(use-package! tree-sitter-langs)
+(setq tsc-dyn-get-from '(:compilation))
+(add-to-list 'load-path "/Users/fran/elisp-tree-sitter/core")
+(add-to-list 'load-path "/Users/fran/elisp-tree-sitter/lisp")
+(add-to-list 'load-path "/Users/fran/elisp-tree-sitter/langs")
+(require 'tree-sitter)
+(require 'tree-sitter-hl)
+(require 'tree-sitter-langs)
+(require 'tree-sitter-debug)
+(require 'tree-sitter-query)
+
 (defun funcs//tree-sitter-has-lang  (mode)
   (assoc mode tree-sitter-major-mode-language-alist))
 (add-hook 'prog-mode-hook
