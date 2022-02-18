@@ -66,8 +66,8 @@
 (package! org-mime)
 
 
-(when (eq system-type 'gnu/linux)
-  (package! scroll-on-jump))
+(package! scroll-on-jump
+  :ignore (not (eq system-type 'gnu/linux)))
 (package! inf-elixir)
 (package! evil-matchit)
 (package! ox-reveal)
@@ -108,5 +108,5 @@
 (package! request)
 (package! blamer)
 (package! dired-sidebar)
-(package! tree-sitter)
-(package! tree-sitter-langs)
+(package! tree-sitter :ignore (not (eq system-type 'gnu/linux)))
+(package! tree-sitter-langs :ignore (not (eq system-type 'gnu/linux)))
