@@ -1,10 +1,6 @@
 ;;; ../emacs-doom-config/elixir.el -*- lexical-binding: t; -*-
 ;; Check if I have the elixir language server
 ;; locally installed.
-(if (file-exists-p elixir-ls-folder)
-        (add-to-list 'exec-path "~/elixir-ls")
-        (warn (format "Missing Elixir language server folder in: %s" elixir-ls-folder)))
-
 ;; To run tests with seed 0
 ;; (setq alchemist-mix-test-default-options '("--seed 0" "--trace"))
 
