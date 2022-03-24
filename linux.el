@@ -12,10 +12,12 @@
 ;;; Shell to use
 (setq shell-file-name "/usr/bin/bash"
       vterm-shell "/usr/bin/fish")
-(when (member "Fira Code" (font-family-list))
-  (setq doom-font (font-spec :family "Fira Code Medium" :size 12)
-        doom-variable-pitch-font (font-spec :family "EB Garamond" :size 12)))
-
+(let ((fonts (font-family-list)))
+;; (when (or (member "Fira Code" fonts)
+;;           (member "FiraCode Nerd Font" fonts)
+;;   (setq doom-font (font-spec :family "Fira Code Medium" :size 12)))
+(when (member "EB Garamond" fonts)
+  (setq doom-variable-pitch-font (font-spec :family "EB Garamond" :size 12))))
 ;;; For when I like to do some web programming
 (setq httpd-root "~/Programación/")
 (add-hook! 'web-mode 'my-impatient-mode-server-url)
@@ -59,9 +61,7 @@
 (with-eval-after-load 'goto-chg (scroll-on-jump-advice-add goto-last-change)
                       (scroll-on-jump-advice-add goto-last-change-reverse))
 
-(global-set-key (kbd "<C-M-next>")
-                (scroll-on-jump-interactive 'diff-hl-next-hunk))
-(global-set-key (kbd "<C-M-prior>")
-                (scroll-on-jump-interactive 'diff-hl-previous-hunk))
 
 (setq scroll-on-jump-use-curve t)
+
+(add-to-list 'auto-mode-alist  '("\\.asm\\'" . nasm-mode))
