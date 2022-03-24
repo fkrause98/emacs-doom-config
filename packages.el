@@ -110,3 +110,5 @@
 (package! dired-sidebar)
 (package! tree-sitter :ignore (not (eq system-type 'gnu/linux)))
 (package! tree-sitter-langs :ignore (not (eq system-type 'gnu/linux)))
+(package! smart-semicolon)
+(package! counsel-tramp)

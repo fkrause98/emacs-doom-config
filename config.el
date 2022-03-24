@@ -123,7 +123,7 @@
           (setq i (1+ i)))))))
 
 ;;; PDF
-(add-hook 'pdf-view #'(progn (auto-revert-mode)))
+(add-hook 'pdf-view 'auto-revert-mode)
 
 ;;; Random Keybindings
 (map! :g "C-c C-b" 'eval-buffer)
@@ -244,6 +244,9 @@
 ;; Helps to see better, a little at least.
 (when (display-graphic-p)
   (setq-default line-spacing 2))
+  ;; (add-hook 'elixir-mode-hook
+  ;;           '(lambda ()
+  ;;              (setq line-spacing 8))))
 
 
 
@@ -263,8 +266,18 @@
 
 (defun funcs//tree-sitter-has-lang  (mode)
   (assoc mode tree-sitter-major-mode-language-alist))
+(setq tree-sitter-blacklist '('rust-mode 'python-mode))
 (add-hook 'prog-mode-hook
           #'(lambda ()
-             (when (funcs//tree-sitter-has-lang major-mode)
+             (when (and
+                    (funcs//tree-sitter-has-lang major-mode)
+                    (not (member major-mode tree-sitter-blacklist)))
                (tree-sitter-hl-mode))
              (rainbow-delimiters-mode)))
+
+(add-hook 'c-mode-hook
+          'smart-semicolon-mode)
+
+
+;;(setq tramp-verbose 10)
+;;(eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
