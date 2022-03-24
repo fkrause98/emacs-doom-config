@@ -113,8 +113,4 @@
 (package! smart-semicolon)
 (package! counsel-tramp)
 (package! x86-lookup)
-(package! nasm-mode
-  :ignore (not (eq system-type 'gnu/linux)))
-
- ;; ("\\.[sS]\\'" . asm-mode)
- ;; ("\\.asm\\'" . asm-mode)
+(package! nasm-mode)
