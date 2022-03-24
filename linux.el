@@ -61,9 +61,7 @@
 (with-eval-after-load 'goto-chg (scroll-on-jump-advice-add goto-last-change)
                       (scroll-on-jump-advice-add goto-last-change-reverse))
 
-(global-set-key (kbd "<C-M-next>")
-                (scroll-on-jump-interactive 'diff-hl-next-hunk))
-(global-set-key (kbd "<C-M-prior>")
-                (scroll-on-jump-interactive 'diff-hl-previous-hunk))
 
 (setq scroll-on-jump-use-curve t)
+
+(add-to-list 'auto-mode-alist  '("\\.asm\\'" . nasm-mode))

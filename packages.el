@@ -110,3 +110,9 @@
 (package! dired-sidebar)
 (package! tree-sitter :ignore (not (eq system-type 'gnu/linux)))
 (package! tree-sitter-langs :ignore (not (eq system-type 'gnu/linux)))
+(package! x86-lookup)
+(package! nasm-mode
+  :ignore (not (eq system-type 'gnu/linux)))
+
+ ;; ("\\.[sS]\\'" . asm-mode)
+ ;; ("\\.asm\\'" . asm-mode)
