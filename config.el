@@ -277,7 +277,6 @@
 
 (add-hook 'c-mode-hook
           'smart-semicolon-mode)
-
-
+(add-to-list 'auto-mode-alist  '("\\.asm\\'" . nasm-mode))
 ;;(setq tramp-verbose 10)
 ;;(eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
