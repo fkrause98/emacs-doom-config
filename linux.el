@@ -64,4 +64,3 @@
 
 (setq scroll-on-jump-use-curve t)
 
-(add-to-list 'auto-mode-alist  '("\\.asm\\'" . nasm-mode))

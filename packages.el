@@ -66,16 +66,13 @@
 (package! org-mime)
 
 
-(package! scroll-on-jump
-  :ignore (not (eq system-type 'gnu/linux)))
+(package! scroll-on-jump)
 (package! inf-elixir)
 (package! evil-matchit)
 (package! ox-reveal)
 (package! org-present)
 (package! exec-path-from-shell)
 (package! evil-matchit)
-(package! tree-sitter)
-(package! tree-sitter-langs)
 (package! perfect-margin)
 (package! company-web)
 (package! mix
@@ -114,3 +111,32 @@
 (package! counsel-tramp)
 (package! x86-lookup)
 (package! nasm-mode)
+(package! dirvish)
+(package! modus-themes)
+(package! gruvbox-theme)
+(package! icons-in-terminal
+  :recipe (:host github :repo "seagle0128/icons-in-terminal.el"))
+(package! inf-elixir)
+(package! tree-sitter-indent
+  :recipe (:type git :repo ""))
+(package! tree-sitter-indent
+  :recipe (:type git
+           :repo "https://codeberg.org/FelipeLema/tree-sitter-indent.el.git"
+           :branch "main"
+           :files ("tree-sitter-indent.el")))
+
+(package! apheleia)
+(package! visual-regexp)
+(package! visual-regexp-steroids)
+(package! evil-smartparens)
+(package! edit-server)
+;; (package! scrollkeeper)
+
+(package! scrollkeeper
+ :recipe (:type git
+          :repo "https://github.com/alphapapa/scrollkeeper.el"))
+
+;; (package! scroll-on-jump
+;;   :recipe (:type git
+;;            :repo "https://codeberg.org/ideasman42/emacs-scroll-on-jump"
+;;            :files "scroll-on-jump.el"))
