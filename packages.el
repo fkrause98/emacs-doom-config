@@ -136,7 +136,15 @@
  :recipe (:type git
           :repo "https://github.com/alphapapa/scrollkeeper.el"))
 
-;; (package! scroll-on-jump
-;;   :recipe (:type git
-;;            :repo "https://codeberg.org/ideasman42/emacs-scroll-on-jump"
-;;            :files "scroll-on-jump.el"))
+(package! org-tree-slide)
+
+(package! ob-restclient :recipe (:host github
+                   :repo "alf/ob-restclient.el"))
+(package! flycheck-vale
+  :recipe (:host github
+           :repo "/abingham/flycheck-vale"))
+
+(package! string-inflection
+  :recipe (:host github
+           :repo "/akicho8/string-inflection"))
+(package! markdown-toc)

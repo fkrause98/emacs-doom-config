@@ -13,10 +13,11 @@
       (font-spec
        :family
        (cond
+        ((member "Monaco" (font-family-list)) "Monaco")
+        ((member "SF Mono" (font-family-list)) "SF Mono")
         ((member "JetBrains Mono" (font-family-list)) "JetBrains Mono")
-        ((member "Fira Code" (font-family-list)) "Fira Code")
-        (t "Monaco"))
-       :size 11))
+        ((member "Fira Code" (font-family-list)) "Fira Code"))
+       :size 12))
 ;;; Shell to use
 (setq shell-file-name "fish"
       vterm-shell "/opt/homebrew/bin/fish")
@@ -30,8 +31,8 @@
 (setq mac-right-option-modifier 'meta)
 (setq mac-pass-command-to-system t)
 (exec-path-from-shell-initialize)
-(unless (boundp 'server-running-p)
-    (server-start))
+;; (unless (boundp 'server-running-p)
+;;     (server-start))
 
 (if (file-exists-p elixir-ls-folder)
         (add-to-list 'exec-path "~/elixir-ls")
@@ -43,3 +44,6 @@
 
 (map! :i  "M-q" 'funcs//insert-at-char)
 (display-battery-mode)
+(set-lookup-handlers! 'nasm-mode
+  :definition 'x86-lookup)
+(setq inferior-lisp-program "sbcl")
