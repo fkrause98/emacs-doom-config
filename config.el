@@ -115,20 +115,5 @@
 
 
 
-;; (after! visual-regexp
-;;   (require 'visual-regexp-steroids)
-;;   (setq vr/engine 'python
-;;         vr/command-python
-;;         (let ((regex-py-folder "~/.emacs.d/.local/straight/repos/visual-regexp-steroids.el/regexp.py"))
-;;           (if (file-exists-p "/usr/bin/python3")
-;;             (concat "python3 " regex-py-folder)
-;;             (concat "python" regex-py-folder)))))
-;; (use-package scrollkeeper
-;;   :quelpa (scrollkeeper :fetcher github :repo "alphapapa/scrollkeeper.el")
-;;   :general ([remap scroll-up-command] #'scrollkeeper-contents-up
-;;             [remap scroll-down-command] #'scrollkeeper-contents-down))
-
-
-
-;; (map! :n "C-d" #'scrollkeeper-contents-up
-;;       :n "C-u" #'scrollkeeper-contents-down)
+(dolist (hook '(c-mode-hook solidity-mode-hook rust-mode-hook))
+  (add-hook hook 'tree-sitter-hl-mode))
