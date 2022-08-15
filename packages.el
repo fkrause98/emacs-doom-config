@@ -81,8 +81,8 @@
 (package! all-the-icons-ivy-rich)
 (package! consult-dir)
 (package! command-log-mode)
-(package! tree-sitter)
-(package! tree-sitter-langs)
+;; (package! tree-sitter)
+;; (package! tree-sitter-langs)
 (package! emamux)
 (package! aggressive-indent)
 (package! ob-restclient :recipe (:host github
@@ -105,8 +105,8 @@
 (package! request)
 (package! blamer)
 (package! dired-sidebar)
-(package! tree-sitter :ignore (not (eq system-type 'gnu/linux)))
-(package! tree-sitter-langs :ignore (not (eq system-type 'gnu/linux)))
+;; (package! tree-sitter :ignore (not (eq system-type 'gnu/linux)))
+;; (package! tree-sitter-langs :ignore (not (eq system-type 'gnu/linux)))
 (package! smart-semicolon)
 (package! counsel-tramp)
 (package! x86-lookup)
@@ -117,8 +117,6 @@
 (package! icons-in-terminal
   :recipe (:host github :repo "seagle0128/icons-in-terminal.el"))
 (package! inf-elixir)
-(package! tree-sitter-indent
-  :recipe (:type git :repo ""))
 (package! tree-sitter-indent
   :recipe (:type git
            :repo "https://codeberg.org/FelipeLema/tree-sitter-indent.el.git"
@@ -148,3 +146,4 @@
   :recipe (:host github
            :repo "/akicho8/string-inflection"))
 (package! markdown-toc)
+(package! counsel-tramp)
