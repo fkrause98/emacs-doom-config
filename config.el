@@ -43,7 +43,7 @@
 ;; Config for MacOs.
 (when (eq system-type 'darwin)
   (load! "mac"))
-(setq-local doom-config-dir "/Users/fran/emacs-doom-config")
+(setq-local doom-config-dir (expand-file-name "~/emacs-doom-config"))
 ;;; Load files inside the "private-elisp" folder.
 (let ((no-dots-regex "^[^\.].*$")
       (private-elisp-fldr (concat doom-config-dir "/private-elisp")))
