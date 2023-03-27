@@ -117,11 +117,6 @@
 (package! icons-in-terminal
   :recipe (:host github :repo "seagle0128/icons-in-terminal.el"))
 (package! inf-elixir)
-(package! tree-sitter-indent
-  :recipe (:type git
-           :repo "https://codeberg.org/FelipeLema/tree-sitter-indent.el.git"
-           :branch "main"
-           :files ("tree-sitter-indent.el")))
 
 (package! apheleia)
 (package! visual-regexp)

@@ -43,9 +43,10 @@
 ;; Config for MacOs.
 (when (eq system-type 'darwin)
   (load! "mac"))
+(setq-local doom-config-dir "/Users/fran/emacs-doom-config")
 ;;; Load files inside the "private-elisp" folder.
 (let ((no-dots-regex "^[^\.].*$")
-      (private-elisp-fldr (concat doom-private-dir "private-elisp")))
+      (private-elisp-fldr (concat doom-config-dir "/private-elisp")))
   (dolist
       (file (directory-files private-elisp-fldr t no-dots-regex))
         (load!  file)))
@@ -53,7 +54,7 @@
 ;;; Dashboard
 (when (or (display-graphic-p)
            (daemonp))
-   (random-banner-image (expand-file-name "splash/" doom-private-dir)))
+   (random-banner-image (concat doom-config-dir "/splash" )))
 (add-hook
  'dashboard-mode-hook
  #'(lambda ()

@@ -34,10 +34,6 @@
 ;; (unless (boundp 'server-running-p)
 ;;     (server-start))
 
-(if (file-exists-p elixir-ls-folder)
-        (add-to-list 'exec-path "~/elixir-ls")
-        (warn (format "Missing Elixir language server folder in: %s" elixir-ls-folder)))
-
 (defun funcs//insert-at-char ()
   (interactive)
   (insert 64))
