@@ -43,3 +43,5 @@
 (set-lookup-handlers! 'nasm-mode
   :definition 'x86-lookup)
 (setq inferior-lisp-program "sbcl")
+
+(push "~/.authinfo" auth-sources)

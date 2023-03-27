@@ -50,8 +50,7 @@
                                         ;(unpin! t)
 ;; (package! solaire-mode
 ;;   :disable t)
-(package! dtrt-indent
-  :disable t)
+(package! dtrt-indent)
 (package! flycheck-popup-tip :disable t)
 (package! frogtag
   :recipe (:host github
@@ -142,3 +141,10 @@
            :repo "/akicho8/string-inflection"))
 (package! markdown-toc)
 (package! counsel-tramp)
+(package! chatgpt-shell
+  :recipe (:host github
+           :repo "xenodium/chatgpt-shell"))
+
+;; (package! gptel
+;;   :recipe (:host github
+;;            :repo "karthink/gptel"))

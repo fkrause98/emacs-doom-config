@@ -121,3 +121,9 @@
   (add-hook hook 'tree-sitter-hl-mode))
 (dolist (hook '(c-mode-hook solidity-mode-hook rust-mode-hook))
   (add-hook hook 'smart-semicolon-mode))
+
+(setq chatgpt-shell-openai-key
+      (plist-get (car (auth-source-search :host "openai.com"))
+                 :secret))
+;; (setq gptel-api-key
+;;       chatgpt-shell-openai-key)
