@@ -125,20 +125,14 @@
 ;; (package! scrollkeeper)
 
 (package! scrollkeeper
- :recipe (:type git
-          :repo "https://github.com/alphapapa/scrollkeeper.el"))
+ :recipe (:host github
+          :repo "alphapapa/scrollkeeper.el"))
 
 (package! org-tree-slide)
 
-(package! ob-restclient :recipe (:host github
-                   :repo "alf/ob-restclient.el"))
-(package! flycheck-vale
-  :recipe (:host github
-           :repo "/abingham/flycheck-vale"))
-
 (package! string-inflection
   :recipe (:host github
-           :repo "/akicho8/string-inflection"))
+           :repo "akicho8/string-inflection"))
 (package! markdown-toc)
 (package! counsel-tramp)
 (package! chatgpt-shell
