@@ -50,6 +50,8 @@
                                         ;(unpin! t)
 ;; (package! solaire-mode
 ;;   :disable t)
+(package! blamer
+  :recipe (:host github :repo "d11wtq/blamer.el"))
 (package! dtrt-indent)
 (package! flycheck-popup-tip :disable t)
 (package! frogtag
@@ -142,3 +144,6 @@
 ;; (package! gptel
 ;;   :recipe (:host github
 ;;            :repo "karthink/gptel"))
+(package! mix
+  :recipe (:host :github
+           :repo "ayrat555/mix.el"))

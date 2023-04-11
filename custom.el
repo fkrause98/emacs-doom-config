@@ -7,7 +7,7 @@
  '(livedown-browser 'firefox)
  '(livedown-open t)
  '(livedown-port 1337)
- '(package-selected-packages '(request quelpa selectric-mode scroll-on-jump nyan-mode)))
+ '(package-selected-packages '(s request quelpa selectric-mode scroll-on-jump nyan-mode)))
  '(package-selected-packages '(buffer-expose tree-sitter-langs tree-sitter use-package))
  '(web-mode-attr-indent-offset 2)
  '(web-mode-markup-indent-offset 2)
